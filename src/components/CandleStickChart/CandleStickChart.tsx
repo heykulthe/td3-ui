@@ -53,23 +53,6 @@ type EChartsOption = echarts.ComposeOption<
     | LineSeriesOption
 >;
 
-// Define types for the stock data
-type StockDataRow = [string, number, number, number, number];
-type StockDataValue = [number, number, number, number];
-type SplitStockData = {
-    categoryData: string[];
-    values: StockDataValue[];
-};
-
-type MarkPointParam = {
-    name: string;
-    data: {
-        coord?: [string, number];
-        value?: number;
-    };
-    value?: number;
-};
-
 const upColor = '#ec0000';
 const upBorderColor = '#8A0000';
 const downColor = '#00da3c';
@@ -167,26 +150,32 @@ const data0 = splitData([
     ['2013/6/13', 2190.1, 2148.35, 2126.22, 2190.1]
 ]);
 
-function splitData(rawData: StockDataRow[]): SplitStockData {
+type OHLCDataPoint = [string, number, number, number, number];
+
+interface SplitDataResult {
+    categoryData: string[];
+    values: number[][];
+}
+
+function splitData(rawData: OHLCDataPoint[]): SplitDataResult {
     const categoryData: string[] = [];
-    const values: StockDataValue[] = [];
-    for (let i = 0; i < rawData.length; i++) {
-        categoryData.push(rawData[i][0] as string);
-        values.push([
-            rawData[i][1] as number,
-            rawData[i][2] as number,
-            rawData[i][3] as number,
-            rawData[i][4] as number
-        ]);
-    }
+    const values: number[][] = [];
+
+    rawData.forEach(item => {
+        const [date, ...rest] = item;
+        categoryData.push(date);
+        values.push(rest);
+    });
+
     return {
         categoryData,
         values
     };
 }
 
-function calculateMA(dayCount: number): (number | string)[] {
-    const result: (number | string)[] = [];
+
+function calculateMA(dayCount: number) {
+    const result = [];
     for (let i = 0, len = data0.values.length; i < len; i++) {
         if (i < dayCount) {
             result.push('-');
@@ -194,12 +183,15 @@ function calculateMA(dayCount: number): (number | string)[] {
         }
         let sum = 0;
         for (let j = 0; j < dayCount; j++) {
-            sum += data0.values[i - j][1];
+            sum += +data0.values[i - j][1];
         }
         result.push(sum / dayCount);
     }
     return result;
 }
+
+
+
 
 const option: EChartsOption = {
     title: {
@@ -261,10 +253,10 @@ const option: EChartsOption = {
                 borderColor0: downBorderColor
             },
             markPoint: {
-                label: {
-                    formatter: (param: MarkPointParam) =>
-                        param != null ? Math.round(param.value || 0) + '' : ''
-                },
+                // label: {
+                //     formatter: (param: any) =>
+                //         param != null ? Math.round(param.value) + '' : ''
+                // },
                 data: [
                     {
                         name: 'Mark',
@@ -290,10 +282,10 @@ const option: EChartsOption = {
                         valueDim: 'close'
                     }
                 ],
-                tooltip: {
-                    formatter: (param: MarkPointParam) =>
-                        `${param.name}<br>${param.data.coord || ''}`
-                }
+                // tooltip: {
+                //     formatter: (param: any) =>
+                //         `${param.name}<br>${param.data.coord || ''}`
+                // }
             },
             markLine: {
                 symbol: ['none', 'none'],
