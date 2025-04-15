@@ -8,20 +8,20 @@ export default function Home() {
   const {data: session} = useSession();
 
   return (
-  <div>
+  <section className="bg-[#040923] text-gray-50">
       <Header />
       <main>
           {
               session && (
-                  <>
+                  <div className="flex">
                       <SideMenu />
                       <Dashboard />
-                  </>
+                  </div>
               )
           }
           <Login />
       </main>
 
-  </div>
+  </section>
   );
 }
