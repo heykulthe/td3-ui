@@ -14,7 +14,8 @@ export const authOptions: NextAuthOptions = {
                 }
             }
         }),
-    ]
+    ],
+    secret: process.env.NEXT_PUBLIC_GOOGLE_SECRET
 }
 
 export default NextAuth(authOptions);
