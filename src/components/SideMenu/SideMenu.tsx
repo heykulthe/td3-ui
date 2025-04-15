@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
+import Deposit from "@/components/Actions/Deposit";
+import Withdraw from "@/components/Actions/Withdraw";
 
 
 const SideMenu = () => {
+    const [showDepositModal, setShowDepositModal] = useState(false);
+    const [showWithdrawModal, setshowWithdrawModal] = useState(false);
+
     return (
         <div className="flex-col my-1 mx-1 w-sm">
             <div className="flex flex-col items-start bg-[#11162f] rounded-xs px-5 py-2">
@@ -11,14 +16,25 @@ const SideMenu = () => {
                 <div className="w-full">
                     <div className="flex items-center justify-end py-3 px-2 space-x-2">
                         <div className="">
-                            <button className="text-xs font-medium bg-[#281d73] px-5 py-1 text-center rounded-xs cursor-pointer">
+                            <button className="text-xs font-medium bg-[#281d73] px-5 py-1 text-center rounded-xs cursor-pointer"
+                                    onClick={() => setShowDepositModal(true)}
+                            >
                                 Deposit
                             </button>
+                            {showDepositModal && (
+                                <Deposit onClose={() => setShowDepositModal(false)} />
+                            )}
                         </div>
+
                         <div className="">
-                            <button className="text-xs font-medium bg-[#303d5d] px-5 py-1 text-center rounded-xs cursor-pointer">
+                            <button className="text-xs font-medium bg-[#303d5d] px-5 py-1 text-center rounded-xs cursor-pointer"
+                                    onClick={() => setshowWithdrawModal(true)}
+                            >
                                 Withdraw
                             </button>
+                            {showWithdrawModal && (
+                                <Withdraw onClose={() => setshowWithdrawModal(false)} />
+                            )}
                         </div>
                     </div>
                     <div className="py-1.5 px-2 flex items-center justify-between">
@@ -70,6 +86,7 @@ const SideMenu = () => {
                 </div>
 
             </div>
+
 
         </div>
     )
