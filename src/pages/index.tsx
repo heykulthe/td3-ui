@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import SideMenu from "@/components/SideMenu";
 import Login from "@/components/Login";
 import { useSession } from "next-auth/react";
+import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
   const {data: session} = useSession();
@@ -20,6 +21,7 @@ export default function Home() {
               )
           }
           <Login />
+          <Footer />
       </main>
 
   </section>

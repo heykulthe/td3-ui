@@ -27,12 +27,12 @@ const Header = () => {
                         <p className="text-gray-50 text-xl -mt-1">2,904.1</p>
                     </div>
                     <div className="flex-col items-start">
-                        <p className="text-gray-500 text-sm uppercase">volume 24h</p>
+                        <p className="text-gray-500 text-sm uppercase">24h volume</p>
                         <p className="text-gray-50 text-xl -mt-1">602,403,323.85</p>
                     </div>
                     <div className="flex-col items-start">
-                        <p className="text-gray-500 text-sm uppercase">funding rate</p>
-                        <p className="text-gray-50 text-xl -mt-1">0.10</p>
+                        <p className="text-gray-500 text-sm uppercase">spread</p>
+                        <p className="text-gray-50 text-xl -mt-1">1.30</p>
                     </div>
                 </div>
             </div>

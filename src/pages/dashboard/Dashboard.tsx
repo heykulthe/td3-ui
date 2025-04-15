@@ -1,14 +1,12 @@
-import React from "react";
+import React from 'react';
+import CandleStickChart from "@/components/CandleStickChart/CandleStickChart";
 
-
-const Dashboard = () => {
+export default function Dashboard() {
     return (
-        <div className="my-1 mx-1 w-xs">
-            <h1>
-
-            </h1>
+        <div className="p-6 w-full">
+            <div className="bg-white p-4 shadow rounded-xs w-full">
+                <CandleStickChart />
+            </div>
         </div>
-    )
+    );
 }
-
-export default Dashboard;

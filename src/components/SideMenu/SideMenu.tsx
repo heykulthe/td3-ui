@@ -3,7 +3,7 @@ import React from "react";
 
 const SideMenu = () => {
     return (
-        <div className="flex-col my-1 mx-1 w-xs">
+        <div className="flex-col my-1 mx-1 w-sm">
             <div className="flex flex-col items-start bg-[#11162f] rounded-xs px-5 py-2">
                 <div className="p-2">
                     <p className="text-gray-400 uppercase font-bold text-lg">Stats</p>
